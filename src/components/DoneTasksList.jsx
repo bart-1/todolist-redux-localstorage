@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Task from './Task';
 
-const ToDoList = ({ tasks }) => {
+const DoneTasksList = ({ tasks }) => {
     console.log(tasks);
-    const filteredTasks = tasks.filter(task => task.taskStatus);
+    const filteredTasks = tasks.filter(task => !task.taskStatus);
     const tasksList = filteredTasks.map(task => <Task key={task.taskId} {...task} />);
     return (
         <>
             <table>
-                <caption>Lista rzeczy do zrobienia</caption>
+                <caption>Zadanie zakończone</caption>
             </table>
             <table>
                 <thead>
@@ -31,6 +31,6 @@ const connectStateToProps = store => ({
     tasks: store.tasks,
 });
 
-const ToDoListConsumer = connect(connectStateToProps)(ToDoList);
+const DoneTasksListConsumer = connect(connectStateToProps)(DoneTasksList);
 
-export default ToDoListConsumer;
+export default DoneTasksListConsumer;

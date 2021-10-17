@@ -4,6 +4,7 @@ import InputSection from './components/InputSection';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import './styles/App.css';
+import ToDoList from './components/ToDoList';
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
       <div className="App">
         to-do-list
         <InputSection />
+        <ToDoList />
       </div>
     </Provider>
   )

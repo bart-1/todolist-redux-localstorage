@@ -34,6 +34,7 @@ export const editTask = ({ taskBody, taskDate, taskId }) => ({
         taskBody,
         taskDate,
         taskId,
+        taskStatus,
     },
 });
 

@@ -5,10 +5,9 @@ import {
     addTask,
     changeTasksStatus,
     editTask,
-    tasksStore,
 } from './actions/appActions';
 
-const InputSection = () => {
+const InputSection = ({ addTask, changeTasksStatus, editTask, taskBody, taskDate, taskId, taskStatus, tasksStore }) => {
     const [actualDate, setActualDate] = useState('');
     const [newTaskBody, setNewTakBody] = useState('');
     const [newTaskDate, setNewTaskDate] = useState('');
@@ -36,10 +35,17 @@ const InputSection = () => {
 
     const handleOnSubmit = e => {
         e.preventDefault();
+        const newTask = {
+            taskBody: newTaskBody,
+            taskDate: newTaskDate,
+            taskId,
+            taskStatus,
+        };
+        taskId ? editTask(newTask) : addTask(newTask);
 
-        return null;
+        setNewTaskDate(actualDate);
+        setNewTakBody('');
     }
-
 
     return (
         <form onSubmit={handleOnSubmit}>
@@ -58,13 +64,13 @@ const InputSection = () => {
                 type="datetime-local"
                 value={newTaskDate}
             />
-            <button type="submit">Dodaj</button>
+            <button type="submit">{taskId ? 'Edytuj' : 'Dodaj'}</button>
         </form>
     );
 }
 
 const connectActionsToProps = ({
-    addTasks,
+    addTask,
     changeTasksStatus,
     editTask
 });

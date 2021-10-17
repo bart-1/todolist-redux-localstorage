@@ -1,19 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { changeTaskStatus } from '../actions/appActions';
+import { deleteTask, changeTaskStatus } from '../actions/appActions';
 
-const Task = ({ taskBody, taskDate, taskId, changeTaskStatus }) => {
+const Task = ({ deleteTask, changeTaskStatus, taskBody, taskDate, taskId, taskStatus }) => {
 
-    const handleOnClick = () => {
-        changeTaskStatus(taskId);
+    const handleOnClick = e => {
+        if (e.target.name === 'done')
+            changeTaskStatus(taskId);
+
+        if (e.target.name === 'delete')
+            deleteTask(taskId);
     }
     return (
         <tr>
             <td>{taskDate}</td>
             <td>{taskBody}</td>
             <td>
-                <button onClick={handleOnClick}>Zrobione</button>
+                <button onClick={handleOnClick} name={taskStatus ? "done" : "delete"}>{taskStatus ? 'Zrobione' : 'Usuń'}</button>
                 <button>Edytuj</button>
             </td>
         </tr>
@@ -21,6 +25,7 @@ const Task = ({ taskBody, taskDate, taskId, changeTaskStatus }) => {
 }
 
 const connectActionsToProps = ({
+    deleteTask,
     changeTaskStatus,
 })
 

@@ -22,15 +22,15 @@ export const appReducer = (state = [], actions) => {
                 return task;
             });
         case DELETE_TASK:
-            return state.filter(actions.payload.taskId !== task.id);
+            return state.filter(task => actions.payload.taskId !== task.taskId);
         case EDIT_TASK:
             return state.map(task => {
-                if (actions.payload.taskId === task.id) {
+                if (actions.payload.taskId === task.taskId) {
                     return task = {
                         taskBody: actions.payload.taskBody,
                         taskDate: actions.payload.taskDate,
-                        taskId,
-                        taskStatus,
+                        taskId: task.taskId,
+                        taskStatus: task.taskStatus,
                     };
                 }
                 return task;

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Task from './Task';
 
 const DoneTasksList = ({ tasks }) => {
-    console.log(tasks);
     const filteredTasks = tasks.filter(task => !task.taskStatus);
     const tasksList = filteredTasks.map(task => <Task key={task.taskId} {...task} />);
     return (

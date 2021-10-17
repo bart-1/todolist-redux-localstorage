@@ -5,7 +5,7 @@ import {
     addTask,
     changeTasksStatus,
     editTask,
-} from './actions/appActions';
+} from '../actions/appActions';
 
 const InputSection = ({ addTask, changeTasksStatus, editTask, taskBody, taskDate, taskId, taskStatus, tasksStore }) => {
     const [actualDate, setActualDate] = useState('');

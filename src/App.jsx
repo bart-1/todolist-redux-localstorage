@@ -1,6 +1,6 @@
 import React from 'react';
 
-import InputSection from './InputSection';
+import InputSection from './components/InputSection';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import './styles/App.css';

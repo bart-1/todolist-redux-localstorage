@@ -1,4 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+
+import {
+    addTask,
+    changeTasksStatus,
+    editTask,
+    tasksStore,
+} from './actions/appActions';
 
 const InputSection = () => {
     const [actualDate, setActualDate] = useState('');
@@ -55,4 +63,17 @@ const InputSection = () => {
     );
 }
 
-export default InputSection;
+const connectActionsToProps = ({
+    addTasks,
+    changeTasksStatus,
+    editTask
+});
+
+const connectStateToProps = store => ({
+    tasksStore: store.tasks,
+});
+
+
+const InputSectionConsumer = connect(connectStateToProps, connectActionsToProps)(InputSection)
+
+export default InputSectionConsumer;

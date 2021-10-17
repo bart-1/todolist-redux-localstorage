@@ -1,16 +1,18 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { deleteTask, changeTaskStatus } from '../actions/appActions';
 
-const Task = ({ deleteTask, changeTaskStatus, taskBody, taskDate, taskId, taskStatus }) => {
+const Task = ({ taskBody, taskDate, taskId, taskStatus }) => {
+
+    const dispatch = useDispatch();
 
     const handleOnClick = e => {
         if (e.target.name === 'done')
-            changeTaskStatus(taskId);
+            dispatch(changeTaskStatus(taskId));
 
         if (e.target.name === 'delete')
-            deleteTask(taskId);
+            dispatch(deleteTask(taskId));
     }
     return (
         <tr>
@@ -24,11 +26,4 @@ const Task = ({ deleteTask, changeTaskStatus, taskBody, taskDate, taskId, taskSt
     );
 }
 
-const connectActionsToProps = ({
-    deleteTask,
-    changeTaskStatus,
-})
-
-const TaskConsumer = connect(null, connectActionsToProps)(Task);
-
-export default TaskConsumer;
+export default Task;

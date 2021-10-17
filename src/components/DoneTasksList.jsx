@@ -1,8 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Task from './Task';
 
-const DoneTasksList = ({ tasks }) => {
+const DoneTasksList = () => {
+
+    const tasks = useSelector(store => store.tasks);
     const filteredTasks = tasks.filter(task => !task.taskStatus);
     const tasksList = filteredTasks.map(task => <Task key={task.taskId} {...task} />);
     return (
@@ -26,10 +28,4 @@ const DoneTasksList = ({ tasks }) => {
     );
 }
 
-const connectStateToProps = store => ({
-    tasks: store.tasks,
-});
-
-const DoneTasksListConsumer = connect(connectStateToProps)(DoneTasksList);
-
-export default DoneTasksListConsumer;
+export default DoneTasksList;

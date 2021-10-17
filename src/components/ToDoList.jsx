@@ -1,8 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Task from './Task';
 
-const ToDoList = ({ tasks }) => {
+const ToDoList = () => {
+
+    const tasks = useSelector(store => store.tasks);
     const filteredTasks = tasks.filter(task => task.taskStatus);
     const tasksList = filteredTasks.map(task => <Task key={task.taskId} {...task} />);
     return (
@@ -26,10 +28,4 @@ const ToDoList = ({ tasks }) => {
     );
 }
 
-const connectStateToProps = store => ({
-    tasks: store.tasks,
-});
-
-const ToDoListConsumer = connect(connectStateToProps)(ToDoList);
-
-export default ToDoListConsumer;
+export default ToDoList;

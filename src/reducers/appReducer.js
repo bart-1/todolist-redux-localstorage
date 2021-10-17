@@ -1,6 +1,6 @@
 import {
     ADD_TASK,
-    CHANGE_TASKS_STATUS,
+    CHANGE_TASK_STATUS,
     DELETE_TASK,
     EDIT_TASK,
 } from "../actions/appActions";
@@ -9,14 +9,14 @@ export const appReducer = (state = [], actions) => {
     switch (actions.type) {
         case ADD_TASK:
             return [...state, actions.payload];
-        case CHANGE_TASKS_STATUS:
+        case CHANGE_TASK_STATUS:
             return state.map(task => {
-                if (actions.payload.taskId === task.id) {
+                if (actions.payload.taskId === task.taskId) {
                     return task = {
-                        taskBody,
-                        taskDate,
-                        taskId,
-                        taskStatus: !taskStatus,
+                        taskBody: task.taskBody,
+                        taskDate: task.taskDate,
+                        taskId: task.taskId,
+                        taskStatus: false,
                     }
                 }
                 return task;

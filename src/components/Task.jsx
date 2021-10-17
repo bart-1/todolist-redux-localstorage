@@ -1,16 +1,29 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Task = ({ taskBody, taskDate, taskId }) => {
+import { changeTaskStatus } from '../actions/appActions';
+
+const Task = ({ taskBody, taskDate, taskId, changeTaskStatus }) => {
+
+    const handleOnClick = () => {
+        changeTaskStatus(taskId);
+    }
     return (
         <tr>
             <td>{taskDate}</td>
             <td>{taskBody}</td>
             <td>
-                <button>Zrobione</button>
+                <button onClick={handleOnClick}>Zrobione</button>
                 <button>Edytuj</button>
             </td>
         </tr>
     );
 }
 
-export default Task;
+const connectActionsToProps = ({
+    changeTaskStatus,
+})
+
+const TaskConsumer = connect(null, connectActionsToProps)(Task);
+
+export default TaskConsumer;

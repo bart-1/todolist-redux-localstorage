@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 
 import {
     addTask,
-    changeTasksStatus,
     editTask,
 } from '../actions/appActions';
 
-const InputSection = ({ addTask, changeTasksStatus, editTask, taskBody, taskDate, taskId, taskStatus, tasksStore }) => {
+const InputSection = ({ addTask, editTask, taskBody, taskDate, taskId, taskStatus, tasksStore }) => {
     const [actualDate, setActualDate] = useState('');
     const [newTaskBody, setNewTakBody] = useState('');
     const [newTaskDate, setNewTaskDate] = useState('');
@@ -71,8 +70,7 @@ const InputSection = ({ addTask, changeTasksStatus, editTask, taskBody, taskDate
 
 const connectActionsToProps = ({
     addTask,
-    changeTasksStatus,
-    editTask
+    editTask,
 });
 
 const connectStateToProps = store => ({

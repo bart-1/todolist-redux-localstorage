@@ -1,39 +1,49 @@
 export const ADD_TASK = 'ADD_TASK';
+export const CHANGE_EDIT_FLAG = 'CHANGE_EDIT_FLAG';
 export const CHANGE_TASK_STATUS = 'CHANGE_TASK_STATUS';
 export const DELETE_TASK = 'DELETE_TASK';
 export const EDIT_TASK = 'EDIT_TASK';
 
-export const addTask = ({ taskBody, taskDate }) => ({
+export const addTask = ({ body, date }) => ({
     type: ADD_TASK,
     payload: {
-        taskBody,
-        taskDate,
-        taskId: Date.now(),
-        taskStatus: true,
+        body,
+        date,
+        editFlag: false,
+        id: Date.now(),
+        status: true,
     },
 });
 
-export const changeTaskStatus = taskId => ({
+export const changeEditFlag = id => ({
+    type: CHANGE_EDIT_FLAG,
+    payload: {
+        id,
+    },
+});
+
+export const changeTaskStatus = id => ({
     type: CHANGE_TASK_STATUS,
     payload: {
-        taskId,
+        id,
     },
 });
 
-export const deleteTask = taskId => ({
+export const deleteTask = id => ({
     type: DELETE_TASK,
     payload: {
-        taskId,
+        id,
     },
 });
 
-export const editTask = ({ taskBody, taskDate, taskId }) => ({
+export const editTask = ({ body, date, id }) => ({
     type: EDIT_TASK,
     payload: {
-        taskBody,
-        taskDate,
-        taskId,
-        taskStatus,
+        body,
+        date,
+        editFlag: false,
+        id,
+        status: true,
     },
 });
 

@@ -1,42 +1,59 @@
 import {
     ADD_TASK,
+    CHANGE_EDIT_FLAG,
     CHANGE_TASK_STATUS,
     DELETE_TASK,
     EDIT_TASK,
 } from "../actions/appActions";
 
-export const appReducer = (state = [], actions) => {
-    switch (actions.type) {
+export const appReducer = (state = [], action) => {
+    switch (action.type) {
         case ADD_TASK:
-            return [...state, actions.payload];
+            return [...state, action.payload];
+        case CHANGE_EDIT_FLAG:
+            return state.map(task => {
+                if (action.payload.id === task.id) {
+                    return task = {
+                        body: task.body,
+                        date: task.date,
+                        editFlag: true,
+                        id: task.id,
+                        status: task.status,
+                    }
+                }
+                return task;
+            });
         case CHANGE_TASK_STATUS:
             return state.map(task => {
-                if (actions.payload.taskId === task.taskId) {
+                if (action.payload.id === task.id) {
                     return task = {
-                        taskBody: task.taskBody,
-                        taskDate: task.taskDate,
-                        taskId: task.taskId,
-                        taskStatus: false,
+                        body: task.body,
+                        date: task.date,
+                        editFlag: task.editFlag,
+                        id: task.id,
+                        status: false,
                     }
                 }
                 return task;
             });
         case DELETE_TASK:
-            return state.filter(task => actions.payload.taskId !== task.taskId);
+            return state.filter(task => action.payload.id !== task.id);
         case EDIT_TASK:
+            debugger
             return state.map(task => {
-                if (actions.payload.taskId === task.taskId) {
+                if (action.payload.id === task.id) {
                     return task = {
-                        taskBody: actions.payload.taskBody,
-                        taskDate: actions.payload.taskDate,
-                        taskId: task.taskId,
-                        taskStatus: task.taskStatus,
+                        body: action.payload.body,
+                        date: action.payload.date,
+                        editFlag: false,
+                        id: task.id,
+                        status: true,
                     };
                 }
                 return task;
             });
         default:
-            console.warn(`unknown type: ${actions.type}`);
+            console.warn(`unknown type: ${action.type}`);
             return state;
 
     }

@@ -5,8 +5,8 @@ import Task from './Task';
 const ToDoList = () => {
 
     const tasks = useSelector(store => store.tasks);
-    const filteredTasks = tasks.filter(task => task.taskStatus);
-    const tasksList = filteredTasks.map(task => <Task key={task.taskId} {...task} />);
+    const filteredTasks = tasks.filter(task => task.status);
+    const tasksList = filteredTasks.map(task => <Task key={task.id} {...task} />);
     return (
         <>
             <table>

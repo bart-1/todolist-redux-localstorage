@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import {
     addTask,
     editTask,
 } from '../actions/appActions';
 
-const InputSection = ({ addTask, editTask, taskBody, taskDate, taskId, taskStatus, tasks }) => {
+const InputSection = () => {
     const [actualDate, setActualDate] = useState('');
-    const [newTaskBody, setNewTakBody] = useState('');
+    const [editedTaskId, setEditedTaskId] = useState('');
+    const [newTaskBody, setNewTaskBody] = useState('');
     const [newTaskDate, setNewTaskDate] = useState('');
 
+    const dispatch = useDispatch();
+    const tasksStore = useSelector(store => store.tasks);
+
     useEffect(() => {
+
         const time = new Date();
         const parsedDate = time.getFullYear() + '-'
             + String(time.getMonth() + 1).padStart(2, '0') + '-'
@@ -24,9 +30,18 @@ const InputSection = ({ addTask, editTask, taskBody, taskDate, taskId, taskStatu
 
     }, []);
 
+    useEffect(() => {
+        const task = tasksStore.find(task => task.editFlag)
+        if (task) {
+            setNewTaskBody(task.body);
+            setEditedTaskId(task.id);
+        }
+
+    }, [tasksStore]);
+
     const handleOnChange = e => {
-        if (e.target.name === 'taskBody')
-            setNewTakBody(e.target.value)
+        if (e.target.name === 'body')
+            setNewTaskBody(e.target.value)
 
         if (e.target.name === 'taskDate')
             setNewTaskDate(e.target.value)
@@ -35,22 +50,22 @@ const InputSection = ({ addTask, editTask, taskBody, taskDate, taskId, taskStatu
     const handleOnSubmit = e => {
         e.preventDefault();
         const newTask = {
-            taskBody: newTaskBody,
-            taskDate: newTaskDate,
-            taskId,
-            taskStatus,
+            body: newTaskBody,
+            date: newTaskDate,
+            id: editedTaskId,
         };
-        taskId ? editTask(newTask) : addTask(newTask);
+        editedTaskId ? dispatch(editTask(newTask)) : dispatch(addTask(newTask));
 
         setNewTaskDate(actualDate);
-        setNewTakBody('');
+        setNewTaskBody('');
+        setEditedTaskId('');
     }
 
     return (
         <form onSubmit={handleOnSubmit}>
             <span>Zadanie</span>
             <textarea
-                name="taskBody"
+                name="body"
                 onChange={handleOnChange}
                 placeholder="wpisz..."
                 value={newTaskBody}
@@ -63,21 +78,9 @@ const InputSection = ({ addTask, editTask, taskBody, taskDate, taskId, taskStatu
                 type="datetime-local"
                 value={newTaskDate}
             />
-            <button type="submit">{taskId ? 'Edytuj' : 'Dodaj'}</button>
+            <button type="submit">{editedTaskId ? 'Edytuj' : 'Dodaj'}</button>
         </form>
     );
 }
 
-const connectActionsToProps = ({
-    addTask,
-    editTask,
-});
-
-const connectStateToProps = store => ({
-    tasks: store.tasks,
-});
-
-
-const InputSectionConsumer = connect(connectStateToProps, connectActionsToProps)(InputSection)
-
-export default InputSectionConsumer;
+export default InputSection;

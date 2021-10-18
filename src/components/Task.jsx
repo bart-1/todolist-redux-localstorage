@@ -1,26 +1,46 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { deleteTask, changeTaskStatus } from '../actions/appActions';
+import { deleteTask, changeTaskStatus, changeEditFlag } from '../actions/appActions';
 
-const Task = ({ taskBody, taskDate, taskId, taskStatus }) => {
+const Task = ({ body, date, id, status }) => {
 
     const dispatch = useDispatch();
+    const tasks = useSelector(store => store.tasks);
+
+    const taskWithEditFlag = tasks.filter(task => task.editFlag)
 
     const handleOnClick = e => {
         if (e.target.name === 'done')
-            dispatch(changeTaskStatus(taskId));
+            dispatch(changeTaskStatus(id));
 
         if (e.target.name === 'delete')
-            dispatch(deleteTask(taskId));
+            dispatch(deleteTask(id));
+
+        if (e.target.name === 'edit')
+            dispatch(changeEditFlag(id));
+
     }
     return (
         <tr>
-            <td>{taskDate}</td>
-            <td>{taskBody}</td>
+            <td>{date}</td>
+            <td>{body}</td>
             <td>
-                <button onClick={handleOnClick} name={taskStatus ? "done" : "delete"}>{taskStatus ? 'Zrobione' : 'Usuń'}</button>
-                <button>Edytuj</button>
+                <button
+                    name={status ? "done" : "delete"}
+                    onClick={handleOnClick}
+                >
+                    {status ? 'Zrobione' : 'Usuń'}
+                </button>
+                {taskWithEditFlag.length
+                    ? null
+                    : <button
+                        name="edit"
+                        onClick={handleOnClick}
+                    >
+                        Edytuj
+                    </button>
+                }
             </td>
         </tr>
     );

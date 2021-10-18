@@ -1,0 +1,90 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 600px;
+    height: 60vh;
+    margin: 2vh auto;
+    padding: 10px;
+    background: rgb(181, 214, 158);
+    border-radius: 5px;
+}
+
+div.input-section {
+    width: auto;
+}
+
+div.tables-section {
+    width: auto;
+    overflow-y: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    margin: auto;
+}
+
+form>div.form-bottom-section {
+    display: flex;
+    margin: 10px 0;
+    align-items: center;
+}
+
+form>div.form-bottom-section>input {
+    flex-grow: 1;
+    margin: 0 10px;
+}
+
+form>textarea {
+    height: 5vh;
+    min-height: 3vh;
+    max-height: 20vh;
+    resize: vertical;
+}
+
+
+table {
+    width: 100%;
+    text-align: center;
+    background: rgb(206, 240, 183);
+}
+
+.done-tasks-table {
+    filter: grayscale();
+}
+
+table>caption {
+    background: green;
+    color: white;
+    position: sticky;
+    top: 0;
+}
+
+table.caption-top-table {
+    position: sticky;
+    top: 0;
+}
+
+table.caption-bottom-table {
+    position: sticky;
+    bottom: 0;
+    top: 0;
+}
+
+td {
+    font-size: small;
+}
+
+td:first-child {
+    width: 26%;
+}
+
+td:last-child {
+    width: 26%;
+}
+
+tr:nth-child(even) {
+    background: rgb(222, 250, 201)
+}

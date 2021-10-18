@@ -70,15 +70,17 @@ const InputSection = () => {
                 placeholder="wpisz..."
                 value={newTaskBody}
             />
-            <span>Data</span>
-            <input
-                min={actualDate}
-                name="taskDate"
-                onChange={handleOnChange}
-                type="datetime-local"
-                value={newTaskDate}
-            />
-            <button type="submit">{editedTaskId ? 'Edytuj' : 'Dodaj'}</button>
+            <div className="form-bottom-section">
+                <span>Data</span>
+                <input
+                    min={actualDate}
+                    name="taskDate"
+                    onChange={handleOnChange}
+                    type="datetime-local"
+                    value={newTaskDate}
+                />
+                <button type="submit">{editedTaskId ? 'Zatwierdź' : 'Dodaj'}</button>
+            </div>
         </form>
     );
 }

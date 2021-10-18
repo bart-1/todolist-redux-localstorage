@@ -9,21 +9,23 @@ const DoneTasksList = () => {
     const tasksList = filteredTasks.map(task => <Task key={task.id} {...task} />);
     return (
         <>
-            <table>
-                <caption>Zadanie zakończone</caption>
-            </table>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Data</th>
-                        <th>Zadanie</th>
-                        <th>Zarządzaj</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {tasksList}
-                </tbody>
-            </table>
+            <div className="done-tasks-table">
+                <table className="caption-bottom-table ">
+                    <caption>Zadanie zakończone</caption>
+                </table>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Zadanie</th>
+                            <th>Zarządzaj</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {tasksList}
+                    </tbody>
+                </table>
+            </div>
         </>
     );
 }

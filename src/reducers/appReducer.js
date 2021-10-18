@@ -39,7 +39,6 @@ export const appReducer = (state = [], action) => {
         case DELETE_TASK:
             return state.filter(task => action.payload.id !== task.id);
         case EDIT_TASK:
-            debugger
             return state.map(task => {
                 if (action.payload.id === task.id) {
                     return task = {

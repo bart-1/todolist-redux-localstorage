@@ -12,10 +12,13 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        to-do-list
-        <InputSection />
-        <ToDoList />
-        <DoneTasksList />
+        <div className="input-section">
+          <InputSection />
+        </div>
+        <div className="tables-section">
+          <ToDoList />
+          <DoneTasksList />
+        </div>
       </div>
     </Provider>
   )

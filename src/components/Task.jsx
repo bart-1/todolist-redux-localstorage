@@ -23,7 +23,7 @@ const Task = ({ body, date, id, status }) => {
     }
     return (
         <tr>
-            <td>{date}</td>
+            <td>{date.replace('T', ' | ')}</td>
             <td>{body}</td>
             <td>
                 <button

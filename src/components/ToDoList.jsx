@@ -9,7 +9,7 @@ const ToDoList = () => {
     const tasksList = filteredTasks.map(task => <Task key={task.id} {...task} />);
     return (
         <>
-            <table>
+            <table className="caption-top-table">
                 <caption>Lista rzeczy do zrobienia</caption>
             </table>
             <table>

@@ -36,8 +36,16 @@ const InputSection = () => {
             setNewTaskBody(task.body);
             setEditedTaskId(task.id);
         }
-
+        /* //wariant z filter zamiast find
+        const task = tasksStore.filter(task => task.editFlag)
+                if (task[0]) {
+                    setNewTaskBody(task[0].body);
+                    setEditedTaskId(task[0].id);
+                }
+        */
     }, [tasksStore]);
+
+
 
     const handleOnChange = e => {
         if (e.target.name === 'body')
